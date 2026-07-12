@@ -8,8 +8,8 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import com.example.sis.dto.AddressDto;
 import com.example.sis.dto.UserDto;
-import com.example.sis.dto.request.CreateUserRequest;
 import com.example.sis.dto.request.UpdateUserRequest;
+import com.example.sis.dto.request.publicRequest.CreateUserAccountRequest;
 import com.example.sis.entity.Address;
 import com.example.sis.entity.User;
 import com.example.sis.entity.UserRole;
@@ -17,10 +17,10 @@ import com.example.sis.entity.UserRole;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 	
-	@Mapping(target = "id", ignore = true)
-	@Mapping(target = "createdAt", ignore = true)
-	@Mapping(target = "updatedAt", ignore = true)
-	User userDtoToUserEntity(CreateUserRequest createUserDto);
+//	@Mapping(target = "id", ignore = true)
+//	@Mapping(target = "createdAt", ignore = true)
+//	@Mapping(target = "updatedAt", ignore = true)
+//	User userDtoToUserEntity(CreateUserRequest createUserDto);
 	
 	default UserRole userRoleDtoToUserRoleEntity(String role) {
 		return UserRole.builder()
@@ -45,5 +45,16 @@ public interface UserMapper {
 	@Mapping(target = "updatedAt", ignore = true)
 	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 	void updateUserEntity(UpdateUserRequest updateUserRequest, @MappingTarget User user);
+	
+	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "createdAt", ignore = true)
+	@Mapping(target = "updatedAt", ignore = true)
+	@Mapping(target = "firstname", ignore = true)
+	@Mapping(target = "middlename", ignore = true)
+	@Mapping(target = "lastname", ignore = true)
+	@Mapping(target = "roles", ignore = true)
+	@Mapping(target = "addresses", ignore = true)
+	@Mapping(target = "birthDate", ignore = true)	
+	User createUserAccountToUserEntity(CreateUserAccountRequest createUserAccountRequest);
 
 }

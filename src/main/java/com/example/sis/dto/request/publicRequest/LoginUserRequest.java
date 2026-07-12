@@ -1,4 +1,4 @@
-package com.example.sis.dto.request;
+package com.example.sis.dto.request.publicRequest;
 
 import lombok.Value;
 

@@ -58,10 +58,4 @@ public class User {
 	@Column(name = "updated_at")
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
-	
-	@PrePersist
-	void save() {
-		addresses.forEach(address -> address.setUser(this));
-		roles.forEach(role -> role.setUser(this));
-	}
 }

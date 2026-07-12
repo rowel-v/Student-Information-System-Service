@@ -5,6 +5,6 @@ import lombok.Value;
 @Value
 public class UserRoleDto {
 	
-	String role; // student | teacher
+	String role; // student | teacher | admin
 
 }

@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.example.sis.dto.request.LoginUserRequest;
+import com.example.sis.dto.request.publicRequest.LoginUserRequest;
 import com.example.sis.result.LoginUserResult;
 
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class AuthenticationService {
 	private final AuthenticationManager authenticationManager;
 	private final JwtService jwtService;
 
-	public LoginUserResult loginRequest(LoginUserRequest loginUserRequest) {
+	public LoginUserResult loginUserRequest(LoginUserRequest loginUserRequest) {
 
 		try {
 			Authentication authentication = authenticationManager.authenticate(

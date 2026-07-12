@@ -1,5 +1,7 @@
 package com.example.sis.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,5 +33,22 @@ public class UserRole {
 	
 	@Column(name = "role_name")
 	private String role;
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserRole other = (UserRole) obj;
+		return Objects.equals(role, other.role);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(role);
+	}
 
 }
