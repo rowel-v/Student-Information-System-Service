@@ -29,15 +29,15 @@ public class UserService {
 	private final UserRepo userRepo;
 	private final UserMapper userMapper;
 	private final PasswordEncoder passwordEncoder;
-	
+
 	private Supplier<UserDetails> authenticatedUser = () -> (UserDetails) SecurityContextHolder.getContext()
-		.getAuthentication().getPrincipal();
-	
+			.getAuthentication().getPrincipal();
+
 	@SuppressWarnings("unused")
 	public CreateUserAccountResult createUserAccount(CreateUserAccountRequest req) {
-		
+
 		String username = req.getUsername();
-		
+
 		return userRepo.findByUsername(username)
 				.map(user -> CreateUserAccountResult.userAlreadyExists())
 				.orElseGet(() -> {

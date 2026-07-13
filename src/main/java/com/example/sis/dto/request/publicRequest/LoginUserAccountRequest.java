@@ -3,7 +3,7 @@ package com.example.sis.dto.request.publicRequest;
 import lombok.Value;
 
 @Value
-public class LoginUserRequest {
+public class LoginUserAccountRequest {
 	
 	private String username;
 	private String password;

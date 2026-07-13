@@ -1,5 +1,7 @@
 package com.example.sis.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -13,8 +15,10 @@ public interface UserRoleMapper {
 	@Mapping(target = "user", ignore = true)
 	UserRole userRoleDtoToUserRoleEntity(UserRoleDto userRoleDto);
 	
-	
-	
-	
+	default List<String> userRolesEntityToUserRolesDto(List<UserRole> userRole) {
+		return userRole.stream()
+				.map(r -> new String(r.getRole()))
+				.toList();
+	}
 
 }

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.sis.dto.request.publicRequest.CreateUserAccountRequest;
-import com.example.sis.dto.request.publicRequest.LoginUserRequest;
+import com.example.sis.dto.request.publicRequest.LoginUserAccountRequest;
 import com.example.sis.dto.response.ApiResponse;
 import com.example.sis.result.CreateUserAccountResult;
 import com.example.sis.result.LoginUserResult;
@@ -23,7 +23,7 @@ public class UserController {
 	private final AuthenticationService authenService;
 
 	@PostMapping("/auth/login")
-	public ResponseEntity<ApiResponse<String>> loginUser(@RequestBody LoginUserRequest req) {
+	public ResponseEntity<ApiResponse<String>> loginUser(@RequestBody LoginUserAccountRequest req) {
 
 		LoginUserResult result = authenService.loginUserRequest(req);
 
