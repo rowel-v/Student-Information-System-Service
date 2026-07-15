@@ -19,7 +19,7 @@ import com.example.sis.service.UserRoleService;
 
 import lombok.RequiredArgsConstructor;
 
-@RequestMapping("/user/role")
+@RequestMapping("api/user/role")
 @RequiredArgsConstructor
 @RestController
 public class UserRoleController {

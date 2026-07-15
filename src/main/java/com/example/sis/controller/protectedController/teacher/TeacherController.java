@@ -1,4 +1,4 @@
-package com.example.sis.controller.protectedController;
+package com.example.sis.controller.protectedController.teacher;
 
 import org.springframework.web.bind.annotation.RestController;
 

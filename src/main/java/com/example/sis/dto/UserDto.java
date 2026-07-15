@@ -16,6 +16,6 @@ public class UserDto {
 	
 	List<String> roles;
 	
-	List<AddressDto> addresses;
+	AddressDto addresses;
 	
 }

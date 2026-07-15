@@ -1,6 +1,7 @@
 package com.example.sis.controller.publicController;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,15 +12,14 @@ import com.example.sis.dto.response.ApiResponse;
 import com.example.sis.result.CreateUserAccountResult;
 import com.example.sis.result.LoginUserResult;
 import com.example.sis.service.security.AuthenticationService;
-import com.example.sis.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 @RestController("userGatewaytController")
 public class UserController {
 
-	private final UserService userService;
 	private final AuthenticationService authenService;
 
 	@PostMapping("/auth/login")
@@ -43,7 +43,7 @@ public class UserController {
 	@PostMapping("/user")
 	public ResponseEntity<ApiResponse<Void>> createUserAccount(@RequestBody CreateUserAccountRequest req) {
 
-		CreateUserAccountResult result = userService.createUserAccount(req);
+		CreateUserAccountResult result = authenService.createUserAccount(req);
 
 		return switch (result.getStatus()) {
 		case USER_ALREADY_EXISTS -> ResponseEntity.status(409).body(ApiResponse.<Void>builder()
