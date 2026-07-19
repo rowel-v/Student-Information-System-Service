@@ -7,22 +7,21 @@ import java.util.Date;
 
 import javax.crypto.SecretKey;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.security.SecureDigestAlgorithm;
 import jakarta.annotation.PostConstruct;
+import lombok.Data;
 
+@Data
 @Service
 public class JwtService {
 	
 	@PostConstruct
-	private void init() {
+	public void init() {
 		SECRET_KEY = Keys.hmacShaKeyFor(s.getBytes());
 		System.out.println(s);
 		System.err.println(generateToken("rowel123"));

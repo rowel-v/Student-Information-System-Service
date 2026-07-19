@@ -1,5 +1,8 @@
 package com.example.sis.entity;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +22,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(schema = "my_schema")
+@DynamicInsert
+@DynamicUpdate
 public class Address {
 	
 	@Id
@@ -41,5 +46,7 @@ public class Address {
 	
 	@Column(name = "postal_code")
 	private int postalCode;
+	
+	
 
 }
