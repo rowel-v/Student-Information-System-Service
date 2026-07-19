@@ -1,7 +1,5 @@
 package com.example.sis.service;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.example.sis.dto.AddressDto;
@@ -13,9 +11,12 @@ import com.example.sis.result.address.CreateAddressResult;
 import com.example.sis.result.address.DeleteAddressResult;
 import com.example.sis.result.address.GetAddressResult;
 import com.example.sis.result.address.UpdateAddressResult;
+import com.example.sis.security.facade.AuthenticationFacade;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class AddressService {
@@ -25,11 +26,15 @@ public class AddressService {
 
 	private final UserRepo userRepo;
 	
+	private final AuthenticationFacade authenticationFacade;
+	
 	public GetAddressResult getAddress() {
-		return userRepo.findByUsername(authenticatedUser().getUsername())
+		log.info("User Request to Get Address");
+		return userRepo.findByUsername(authenticationFacade.getUsername())
 				.map(user -> {
 					
 					if (user.getAddresses() == null) {
+						log.warn("User Has No Address Saved");
 						return GetAddressResult.userAddressNotSet();
 					}
 					
@@ -43,7 +48,7 @@ public class AddressService {
 
 		Address address = addressMapper.addressDtoToAddressEntity(addressDto);
 
-		return userRepo.findByUsername(authenticatedUser().getUsername())
+		return userRepo.findByUsername(authenticationFacade.getUsername())
 				.map(user -> {
 
 					if (user.getAddresses() != null) {
@@ -59,7 +64,7 @@ public class AddressService {
 	}
 	
 	public DeleteAddressResult deleteAddress() {
-		return userRepo.findByUsername(authenticatedUser().getUsername())
+		return userRepo.findByUsername(authenticationFacade.getUsername())
 				.map(user -> {
 					
 					if (user.getAddresses() == null) {
@@ -75,7 +80,7 @@ public class AddressService {
 	
 	public UpdateAddressResult updateAddress(AddressDto addressDto) {
 		
-		return userRepo.findByUsername(authenticatedUser().getUsername())
+		return userRepo.findByUsername(authenticationFacade.getUsername())
 				.map(user -> {
 				
 					if (user.getAddresses() == null) {
@@ -89,10 +94,6 @@ public class AddressService {
 					return UpdateAddressResult.updateAddressSuccess(savedAddress);
 				})
 				.orElseThrow();
-	}
-
-	private UserDetails authenticatedUser() {
-		return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 
 }
